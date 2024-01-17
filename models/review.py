@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 """ Review module for the HBNB project """
 from models.base_model import BaseModel
+from sqlalchemy import Column, DoreignKey, String, Text,
+from sqlalchemy.orm import relationship
+from os import getenv
 
 
 class Review(BaseModel):
