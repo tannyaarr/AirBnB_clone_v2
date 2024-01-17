@@ -6,10 +6,11 @@ from sqlalchemy.orm import relationship
 from models.review import Review
 from os import getenv
 
+metadata = Base.metadata
 
 place_amenity = Table(
     "place_amenity",
-    Base.metadata,
+    metadata,
     Column(
         "place_id",
         String(60),
@@ -70,7 +71,7 @@ class Place(BaseModel, Base):
                 if amenity.id in self.amenity_ids:
                     amenitiesList.append(amenity)
             return amenitiesList
-
+     elif os.environ.get('HBNB_TYPE_STORAGE') == 'fs':
         @property
         def reviews(self):
             """Getter method"""

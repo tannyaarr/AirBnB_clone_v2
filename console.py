@@ -184,37 +184,28 @@ class HBNBCommand(cmd.Cmd):
 	    return None
 
     def do_create(self, args):
-	"""Create an object of any class"""
-	if not arg:
-	    print("** class name missing **")
-	    return
-	args = arg.split()
-	class_name = args[0]
-	
-	if class_name not in self.__classes:
-		print("** class doesn't exist **")
-		return
-
-	args = args[1:]
-	params = {}
-	for arg in args:
-		try:
-			key, value = arg.split('=')
-			key = value.replace('_'. ' ')
-			if  value[0] == '"' and value[-1] == '"'and value.count('\\"') % 2 == 0:
-				value = value[1:-1].replace('\\"', '"')
-			elif '.'in value:
-				value = float(value)
-			else:
-				value = int(value)
-			params[key] = value
-		except Valueerror:
-			pass
-	instance = self.classes[class_name](**params)
-	instance.save()
-	print(instance.id)
-		
-
+        """Create an object of any class"""
+        if not args:
+            print("** class name missing **")
+            return
+        args_array = args.split()
+        class_name = args_array[0]
+        if class_name not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+            return
+        new_instance = HBNBCommand.classes[class_name]()
+        for param_index in range(1, len(args_array)):
+            param_array = args_array[param_index].split("=")
+            if len(param_array) == 2:
+                key = param_array[0]
+                if key not in HBNBCommand.keys[class_name]:
+                    continue
+                value = self.parse_value(param_array[1])
+                if value is not None:
+                    setattr(new_instance, key, value)
+            else:
+                pass
+        new_instance.save()
 
     def help_create(self):
 	"""Help information for the create method"""
