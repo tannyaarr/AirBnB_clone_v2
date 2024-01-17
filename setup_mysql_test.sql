@@ -1,4 +1,3 @@
-#!/bin/bash
 -- script that prepares a MySQl server
 
 -- creates the database if it doesn't exist
