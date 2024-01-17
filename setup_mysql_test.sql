@@ -3,6 +3,7 @@
 -- creates the database if it doesn't exist
 -- database hbnb_test_db
 CREATE DATABASE IF NOT EXISTS hbnb_test_db;
+USE hbnb_test_db;
 -- create the user hbnb_test if it doesn't exit
 CREATE USER IF NOT EXISTS 'hbnb_test'@'localhost' IDENTIFIED BY 'hbnb_test_pwd';
 -- grant all pivileges
