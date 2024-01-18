@@ -3,22 +3,33 @@
 import json
 from models.base_model import BaseModel
 import os
-
+from models.user import User
+from models.state import State
+from models.place import Place
+from models.city import City
+from models.review import Review
+from models.amenity import Amenity
 class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
     __file_path = 'file.json'
     __objects = {}
 
-    def all(self, cls=None):
-        """Returns a dictionary of models currently in storage"""
-        if cls is None:
-            return FileStorage.__objects
+     def all(self, cls=None):
+        """returns a dictionary
+        Return:
+            returns a dictionary of __object
+        """
+        dic = {}
+        if cls:
+            dictionary = self.__objects
+            for key in dictionary:
+                partition = key.replace('.', ' ')
+                partition = shlex.split(partition)
+                if (partition[0] == cls.__name__):
+                    dic[key] = self.__objects[key]
+            return (dic)
         else:
-            list_class_obj = {}
-						for key, val in FileStorage.__objects.items():
-                if val.__class__ == cls:
-                    list_class_obj[key] = val
-            return list_class_obj
+            return self.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -61,11 +72,9 @@ class FileStorage:
         """deletes obj from __objects if it's inside,
         if obj is equal to None, the method should not do anything
         """
-        if obj is not None:
-            key = obj.__class__.__name__ + '.' + obj.id
-            if key in FileStorage.__objects:
-                del FileStorage.__objects[key]
-                self.save()
+        if obj:
+            key = "{}.{}".format(type(obj).__name__, obj.id)
+                del self.__objects[key]
 
     def close(self):
         """

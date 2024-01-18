@@ -4,17 +4,15 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from models.city import City
-from os import getenv
 import models
-
+from sqlalchemy.ext.declarative import declarative_base
 
 class State(BaseModel, Base):
     """ State class inherits from Basemodel and Base"""
     __tablename__ = 'states'
 
-    if getenv('HBNB_TYPE_STORAGE') == "db":
         name = Column(String(128), nullable=False)
-        cities = relationship("City", cascade="all,delete", backref="state")
+        cities = relationship("City", cascade="all, delete-orphan", backref="state")
     else:
         name = ""
 
