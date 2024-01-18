@@ -23,16 +23,3 @@ class User(BaseModel, Base):
         password = ""
         first_name = ""
         last_name = ""
-
-	if storage_type != 'db':
-            @property
-            def places(self):
-                """Getter attribute for places in FileStorage"""
-                from models import storage
-                from models.place import Place
-
-                place_list = []
-                for place in storage.all(Place).values():
-                    if place.user_id == self.id:
-                        place_list.append(place)
-                return place_list
