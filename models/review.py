@@ -3,7 +3,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, ForeignKey, String, Integer, Float
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declaratve_base
+from sqlalchemy.ext.declarative import declarative_base
 
 
 class Review(BaseModel, Base):

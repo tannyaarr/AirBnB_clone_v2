@@ -1,32 +1,35 @@
 #!/usr/bin/python3
-""" State Module for HBNB project """
-from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String
-from sqlalchemy.orm import relationship
-from models.city import City
-import models
+"""This is the state class"""
 from sqlalchemy.ext.declarative import declarative_base
+from models.base_model import BaseModel, Base
+from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String
+import models
+from models.city import City
+import shlex
+
 
 class State(BaseModel, Base):
-    """ State class inherits from Basemodel and Base"""
-    __tablename__ = 'states'
+    """This is the class for State
+    Attributes:
+        name: input name
+    """
+    __tablename__ = "states"
+    name = Column(String(128), nullable=False)
+    cities = relationship("City", cascade='all, delete, delete-orphan',
+                          backref="state")
 
-        name = Column(String(128), nullable=False)
-        cities = relationship("City", cascade="all, delete-orphan", backref="state")
-    else:
-        name = ""
-
-        @property
-        def cities(self):
-            """
-                returns the list of City instances with state_id
-                equals to the current State.id => It will be the FileStorage
-                relationship between State and City
-            """
-
-            citiesList = []
-            citiesAll = models.storage.all(City)
-            for city in citiesAll.values():
-                if city.state_id == self.id:
-                    citiesList.append(city)
-            return citiesList
+    @property
+    def cities(self):
+        var = models.storage.all()
+        lista = []
+        result = []
+        for key in var:
+            city = key.replace('.', ' ')
+            city = shlex.split(city)
+            if (city[0] == 'City'):
+                lista.append(var[key])
+        for elem in lista:
+            if (elem.state_id == self.id):
+                result.append(elem)
+        return (result)
