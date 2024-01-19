@@ -4,6 +4,7 @@ import unittest
 from models.base_model import BaseModel
 from models import storage
 import os
+import pycodestyle
 
 
 class test_fileStorage(unittest.TestCase):
@@ -106,4 +107,5 @@ class test_fileStorage(unittest.TestCase):
         """ FileStorage object storage created """
         from models.engine.file_storage import FileStorage
         print(type(storage))
-        self.assertEqual(type(storage), FileStorage)
+       self.assertEqual(type(storage), FileStorage)
+
