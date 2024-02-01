@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Fabfile to create and distribute an archive to a web server.
-import os.path
+import os.path import isfile
 from datetime import datetime
 from fabric.api import env
 from fabric.api import local
