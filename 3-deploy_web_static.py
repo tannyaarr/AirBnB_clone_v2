@@ -11,6 +11,7 @@ env.hosts = ['100.25.179.193', '54.174.161.74']
 env.user = 'ubuntu'
 env.key_filename = '~/.ssh/school'
 
+
 def do_pack():
     """
     Create a tar gzipped archive of the web_static directory
@@ -23,6 +24,7 @@ def do_pack():
     if result.failed:
         return None
     return "versions/{}".format(file_name)
+
 
 def do_deploy(archive_path):
     """
@@ -37,6 +39,7 @@ def do_deploy(archive_path):
         print(e)
         return False
 
+
 def deploy():
     """
     Creates and distributes an archive to web servers
@@ -47,6 +50,7 @@ def deploy():
         return False
 
     return do_deploy(archive_path)
+
 
 if __name__ == "__main__":
     deploy()
