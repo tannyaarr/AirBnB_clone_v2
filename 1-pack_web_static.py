@@ -1,10 +1,11 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # Fabfile to generates a .tgz archive from the contents of web_static.
 import os.path
 from datetime import datetime
 from fabric.api import local
-from collections.abc import Mapping
 
+env.hosts = ["100.25.179.193", "54.174.161.74"]
+env.user = 'ubuntu'
 
 def do_pack():
     """Create a tar gzipped archive of the directory web_static."""

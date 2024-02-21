@@ -16,10 +16,11 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = {}
 
-     def all(self, cls=None):
-        """returns a dictionary
-        Return:
-            returns a dictionary of __object
+
+    def all(self, cls=None):
+        """
+        returns a dictionary
+        Return: returns a dictionary of __object
         """
         dic = {}
         if cls:
@@ -29,9 +30,9 @@ class FileStorage:
                 partition = shlex.split(partition)
                 if (partition[0] == cls.__name__):
                     dic[key] = self.__objects[key]
-            return (dic)
-        else:
-            return self.__objects
+                    return (dic)
+                else:
+                    return self.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -76,9 +77,9 @@ class FileStorage:
         """
         if obj:
             key = "{}.{}".format(type(obj).__name__, obj.id)
-                del self.__objects[key]
+            del self.__objects[key]
 
     def close(self):
-        """
+        """calls reload()
         """
         self.reload()
