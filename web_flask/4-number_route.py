@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Starts a flask web application
     Run the Flask apllication on 0.0.0.0, port 5000
 """
