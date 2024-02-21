@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 """Starts a flask web application
-    Run the Flask apllication on 0.0.0.0, port 5000
+    Run the Flask application on 0.0.0.0, port 5000
 """
 
 
 from flask import Flask
+
 app = Flask(__name__)
 
 
